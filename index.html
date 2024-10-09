@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Data Visualizations</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .chart-container {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Spotify Data Visualizations</h1>
+    <p>This page showcases various visualizations related to Spotify's revenue, user demographics, and streaming data. Each chart provides insights into different aspects of Spotify's performance and user engagement.</p>
+
+    <div class="chart-container">
+        <h2>Spotify Revenue Over Time</h2>
+        <p>This bar chart illustrates the trend of Spotify's revenue over the years, showcasing the growth trajectory of the company. The interactive slider allows users to filter the revenue displayed based on a target revenue threshold.</p>
+        <div id="spotify-revenue-time-chart"></div>
+    </div>
+
+    <div class="chart-container">
+        <h2>Spotify's Pay Per Million Streams in Each Country (USD)</h2>
+        <p>This map visualization displays Spotify's pay per million streams across different countries. It highlights the variations in compensation for artists based on their geographical location, providing insights into market dynamics.</p>
+        <div id="spotify-pay-per-million-streams-chart"></div>
+    </div>
+
+    <div class="chart-container">
+        <h2>Age Demography of Spotify Users in 2023</h2>
+        <p>This pie chart visualizes the age demographic of Spotify users in 2023, showing the distribution of users across different age groups. Each slice represents the percentage of users in a specific age range.</p>
+        <div id="spotify-age-demography-chart"></div>
+    </div>
+
+    <div class="chart-container">
+        <h2>Spotify Top Podcasts (in millions)</h2>
+        <p>This chart displays the top podcasts on Spotify measured by follower count in millions. The visualization effectively highlights the leading podcasts and their respective audience sizes.</p>
+        <div id="spotify-top-podcasts-chart"></div>
+    </div>
+
+    <div class="chart-container">
+        <h2>Top Artists by Total Spotify Streams (in billions)</h2>
+        <p>This visualization ranks the top artists on Spotify based on their total streams in billions. It allows users to see which artists dominate the platform in terms of listener engagement.</p>
+        <div id="spotify-top-artists-chart"></div>
+    </div>
+
+    <div class="chart-container">
+        <h2>Spotify Monthly Active Users by Each Quarter of the Year</h2>
+        <p>This line chart shows the monthly active users of Spotify for each quarter from 2015 to 2023, giving a comparative view of user growth across different quarters.</p>
+        <div id="spotify-monthly-active-users-chart"></div>
+    </div>
+
+    <script>
+        // Spotify Revenue Over Time Chart
+        const revenueOverTimeSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 1200,
+            "height": 600,
+            "title": {
+                "text": "Spotify Revenue Over Time",
+                "fontWeight": "bold",
+                "fontSize": 20
+            },
+            "data": {
+                "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/spotify%20revenue.csv"
+            },
+            "params": [
+                {
+                    "name": "Target_Revenue",
+                    "value": 0.43,
+                    "bind": {
+                        "input": "range",
+                        "min": 0.43,
+                        "max": 13.25,
+                        "step": 0.01,
+                        "name": "Select Target Revenue in € (Billions): "
+                    }
+                }
+            ],
+            "transform": [
+                {
+                    "filter": "datum['Spotify Revenue in billions (Euros)'] >= Target_Revenue"
+                }
+            ],
+            "layer": [
+                {
+                    "mark": {
+                        "type": "bar",
+                        "width": 30,
+                        "color": "#756bb1"
+                    },
+                    "encoding": {
+                        "x": {
+                            "field": "Year",
+                            "type": "nominal",
+                            "timeUnit": "year",
+                            "title": "Year",
+                            "axis": {
+                                "titleFontSize": 12
+                            }
+                        },
+                        "y": {
+                            "field": "Spotify Revenue in billions (Euros)",
+                            "type": "quantitative",
+                            "title": "Spotify Revenue (Billions of Euros)",
+                            "axis": {
+                                "titleFontSize": 12
+                            }
+                        },
+                        "tooltip": [
+                            {
+                                "field": "Year",
+                                "type": "temporal",
+                                "title": "Year:",
+                                "format": "%Y"
+                            },
+                            {
+                                "field": "Spotify Revenue in billions (Euros)",
+                                "type": "quantitative",
+                                "title": "Revenue in € (Billions):",
+                                "format": ".2f"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 12,
+                        "fontWeight": "bold",
+                        "dx": 0,
+                        "dy": -8
+                    },
+                    "encoding": {
+                        "x": {
+                            "field": "Year",
+                            "type": "nominal",
+                            "timeUnit": "year"
+                        },
+                        "y": {
+                            "field": "Spotify Revenue in billions (Euros)",
+                            "type": "quantitative"
+                        },
+                        "text": {
+                            "field": "Spotify Revenue in billions (Euros)",
+                            "type": "quantitative",
+                            "format": ".2f"
+                        }
+                    }
+                }
+            ]
+        };
+        vegaEmbed('#spotify-revenue-time-chart', revenueOverTimeSpec);
+
+        // Spotify Pay Per Million Streams Chart
+        const payPerMillionStreamsSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "title": "Spotify's Pay Per Million Streams in Each Country (USD)",
+            "width": 1200,
+            "height": 600,
+            "projection": {
+                "type": "equalEarth"
+            },
+            "layer": [
+                {
+                    "data": {
+                        "graticule": {
+                            "step": [30, 30]
+                        }
+                    },
+                    "mark": {
+                        "type": "geoshape",
+                        "stroke": "lightgray",
+                        "strokeWidth": 0.5
+                    }
+                },
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/main/ne_110m.topojson",
+                        "format": {
+                            "type": "topojson",
+                            "feature": "ne_110m_admin_0_countries"
+                        }
+                    },
+                    "mark": {
+                        "type": "geoshape",
+                        "fill": "lightgray",
+                        "stroke": "white"
+                    }
+                },
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/main/ne_110m.topojson",
+                        "format": {
+                            "type": "topojson",
+                            "feature": "ne_110m_admin_0_countries"
+                        }
+                    },
+                    "transform": [
+                        {
+                            "lookup": "properties.NAME",
+                            "from": {
+                                "data": {
+                                    "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/main/pay%20per%20stream%20data.csv"
+                                },
+                                "key": "Country",
+                                "fields": ["Pay Per Stream", "Pay Per Million Streams"]
+                            }
+                        }
+                    ],
+                    "mark": {
+                        "type": "geoshape",
+                        "stroke": "white"
+                    },
+                    "encoding": {
+                        "color": {
+                            "field": "Pay Per Million Streams",
+                            "type": "quantitative",
+                            "scale": {
+                                "type": "threshold",
+                                "domain": [1, 200, 500, 800, 3000, 5000],
+                                "range": [
+                                    "#fee5d9",
+                                    "#fcbba1",
+                                    "#fc9272",
+                                    "#fb6a4a",
+                                    "#de2d26",
+                                    "#a50f15"
+                                ]
+                            },
+                            "legend": {
+                                "title": "Pay Per Million Streams (USD)", 
+                                "format": "~s"  
+                            }
+                        },
+                        "tooltip": [
+                            {
+                                "field": "properties.NAME",
+                                "type": "nominal",
+                                "title": "Country"
+                            },
+                            {
+                                "field": "Pay Per Stream",
+                                "type": "quantitative",
+                                "title": "Pay Per Stream"
+                            },
+                            {
+                                "field": "Pay Per Million Streams",
+                                "type": "quantitative",
+                                "format": ".2f",
+                                "title": "Pay Per Million Streams"
+                            }
+                        ]
+                    }
+                }
+            ]
+        };
+        vegaEmbed('#spotify-pay-per-million-streams-chart', payPerMillionStreamsSpec);
+
+        // Age Demography of Spotify Users Chart
+        const ageDemographySpec = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": {
+            "text": "Age Demography of Spotify Users in 2023",
+            "fontWeight": "bold",
+            "fontSize": 20
+          },
+          "width": 1200,
+          "height": 600,
+          "data": {
+            "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/Age%20Demography.csv",
+            "format": {
+              "type": "csv"
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum['Percentage of users (%)']",
+              "as": "percentage" 
+            }
+          ],
+          "mark": {
+            "type": "arc",
+            "outerRadius": 220 
+          },
+          "encoding": {
+            "theta": {
+              "field": "percentage", 
+              "type": "quantitative"
+            },
+            "color": {
+              "field": "Age Group", 
+              "type": "nominal",
+              "legend": {
+                "title": "Age Group"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "Age Group",
+                "type": "nominal",
+                "title": "Age Group"
+              },
+              {
+                "field": "Percentage of users (%)",
+                "type": "quantitative",
+                "title": "Percentage of Users (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        };
+        vegaEmbed('#spotify-age-demography-chart', ageDemographySpec);
+
+        // Spotify Top Podcasts Chart
+        const topPodcastsSpec = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": {
+            "text": "Spotify Top Podcasts (in millions)",
+            "fontWeight": "bold",
+            "fontSize": 20
+          },
+          "width": 1200,
+          "height": 600,
+          "data": {
+            "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/Top%20Podcast.csv",
+            "format": {
+              "type": "csv"
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum['Follower Count (million)']",
+              "as": "Follower Count"
+            },
+            {
+              "calculate": "datum['Podcast'] === 'The Joe Rogan Experience' ? 15 : datum['Follower Count']",
+              "as": "Adjusted Count"
+            }
+          ],
+          "layer": [
+            {
+              "mark": {
+                "type": "rule",
+                "strokeWidth": 2,
+                "stroke": "#252525"
+              },
+              "encoding": {
+                "x": {
+                  "field": "Follower Count",
+                  "type": "quantitative",
+                  "title": "Follower Count (in millions)",
+                  "scale": {
+                    "domain": [0, 15] 
+                  }
+                },
+                "y": {
+                  "field": "Podcast",
+                  "type": "nominal",
+                  "title": "Podcast",
+                  "sort": {
+                    "field": "Adjusted Count",
+                    "order": "descending" 
+                  }
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "point",
+                "filled": true,
+                "size": 100,
+                "color": "#756bb1"
+              },
+              "encoding": {
+                "x": {
+                  "field": "Follower Count",
+                  "type": "quantitative"
+                },
+                "y": {
+                  "field": "Podcast",
+                  "type": "nominal",
+                  "sort": {
+                    "field": "Adjusted Count",
+                    "order": "descending" 
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "Podcast",
+                    "type": "nominal",
+                    "title": "Podcast"
+                  },
+                  {
+                    "field": "Follower Count (million)",
+                    "type": "quantitative",
+                    "title": "Follower Count (in millions)",
+                    "format": ".2f"
+                  }
+                ]
+              }
+            }
+          ]
+        };
+        vegaEmbed('#spotify-top-podcasts-chart', topPodcastsSpec);
+
+        // Top Artists by Total Spotify Streams Chart
+        const topArtistsSpec = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": {
+            "text": "Top Artists by Total Spotify Streams (in billions)",
+            "fontWeight": "bold",
+            "fontSize": 20
+          },
+          "width": 1200,
+          "height": 600,
+          "data": {
+            "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/Top%20Artists.csv",
+            "format": {
+              "type": "csv"
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum['Total Spotify Streams (billion)']",
+              "as": "Total Streams"
+            }
+          ],
+          "layer": [
+            {
+              "mark": {
+                "type": "rule",
+                "strokeWidth": 2,
+                "stroke": "#c0c0c0"  
+              },
+              "encoding": {
+                "x": {
+                  "field": "Total Streams",
+                  "type": "quantitative",
+                  "title": "Total Streams (in billions)",
+                  "scale": {
+                    "domain": [0, 90]  
+                  }
+                },
+                "y": {
+                  "field": "Artist",
+                  "type": "nominal",
+                  "title": "Artist",
+                  "sort": {
+                    "field": "Total Streams",
+                    "order": "descending"  
+                  }
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "point",
+                "filled": true,
+                "size": 100,  
+                "color": "#756bb1"  
+              },
+              "encoding": {
+                "x": {
+                  "field": "Total Streams",
+                  "type": "quantitative"
+                },
+                "y": {
+                  "field": "Artist",
+                  "type": "nominal",
+                  "sort": {
+                    "field": "Total Streams",  
+                    "order": "descending" 
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "Artist",
+                    "type": "nominal",
+                    "title": "Artist"
+                  },
+                  {
+                    "field": "Total Spotify Streams (billion)",
+                    "type": "quantitative",
+                    "title": "Total Streams (in billions)",
+                    "format": ".2f"
+                  }
+                ]
+              }
+            }
+          ]
+        };
+        vegaEmbed('#spotify-top-artists-chart', topArtistsSpec);
+
+        // Spotify Monthly Active Users by Quarter Chart
+        const monthlyActiveUsersSpec = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": {
+            "text": "Spotify Monthly Active Users by each Quarter of the Year",
+            "fontWeight": "bold",
+            "fontSize": 20
+          },
+          "width": 1200,
+          "height": 600,
+          "data": {
+            "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/monthly%20active%20users%20(new).csv",
+            "format": {
+              "type": "csv"
+            }
+          },
+          "mark": {
+            "type": "line",
+            "point": true
+          },
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "temporal",
+              "timeUnit": "year",
+              "title": "Year"
+            },
+            "y": {
+              "field": "Spotify Monthly Active Users (million)",
+              "type": "quantitative",
+              "title": "Monthly Active Users (million)"
+            },
+            "color": {
+              "field": "Quarter",
+              "type": "nominal",
+              "title": "Quarter",
+              "scale": {
+                "domain": ["Q1", "Q2", "Q3", "Q4"],
+                "range": ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"]
+              }
+            },
+            "tooltip": [
+              {"field": "Year", "type": "temporal", "timeUnit": "year", "title": "Year"},
+              {"field": "Quarter", "type": "nominal", "title": "Quarter"},
+              {"field": "Spotify Monthly Active Users (million)", "type": "quantitative", "title": "Users (million)"}
+            ]
+          }
+        };
+        vegaEmbed('#spotify-monthly-active-users-chart', monthlyActiveUsersSpec);
+    </script>
+</body>
+</html>
