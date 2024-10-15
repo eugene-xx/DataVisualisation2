@@ -4,167 +4,505 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify Data Visualizations</title>
+
+    <!-- vegalite -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .chart-container {
-            margin-bottom: 40px;
-        }
+      /* import display font for title */
+      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+
+      .container {
+          display: flex;
+          justify-content: space-between;
+      }
+
+      /* formatting into 2 sections for the pragraphs */
+      .left, .right {
+      width: 45%; /* Adjust the width as necessary */
+      padding: 10px;
+      }
+
+      .chart-container {
+          margin-bottom: 40px;
+          /* scale: 90%  ; */
+          /* margin is separation btwn border to outside (outward)
+              padding is separation btwn border and text (inward) */
+          padding: 30px 20px;
+          margin: 20px 0px;
+          border: 1px solid #ddd;
+          background-color: #f9f9f9;
+      }
+
+      /* New container for chart descriptions */
+      .chart-description {
+          display: flex;
+          justify-content: space-between;
+          
+      }
+
+      /* title color and font and font size */
+      h1 {
+          text-align: center;
+          font-family: 'Oswald', sans-serif; /* Display font */
+          color: #1DB954; /* Spotify's green color */
+          font-size: 48px; /* Increase font size for a display effect */
+      }
+
+      body {
+          font-family: Arial, sans-serif;
+          padding-left: 90px;
+          padding-right: 90px;
+      }
+
+      /* #spotify-top-podcasts-chart {
+          scale: 80%;
+          padding-left: 20px;
+          padding-right: 90px;
+      } 
+      */
+
+      h2 {
+        text-align: center;
+        color: #006d2c;
+        font-size: 30px;
+      }
+
     </style>
 </head>
-<body>
 
+<body>
+    <!-- main title -->
     <h1>Spotify Data Visualizations</h1>
-    <p>This page showcases various visualizations related to Spotify's revenue, user demographics, and streaming data. Each chart provides insights into different aspects of Spotify's performance and user engagement.</p>
+    <div class="container">
+      <div class="left">
+          <p>Imagine millions of people around the world tuning in to their favorite songs, podcasts, and playlists every day—this is the world of Spotify, a digital music platform that has transformed how we experience music.</p>
+          <p> Behind the seamless interface lies a treasure trove of data that tells the story of its global reach, how its users engage, and how the platform has evolved over time.</p>
+      </div>
+      
+      <div class="right">
+          <p>Through vibrant visualizations, we can trace the rise in Spotify's monthly active users, explore the patterns in streaming behavior across different regions, and uncover how shifts in technology and culture have shaped the music landscape.</p>
+          <p>These visual stories bring to life the data behind Spotify's success, offering a window into the pulse of a digital music revolution.</p>
+      </div>
+  </div>
 
     <div class="chart-container">
-        <h2>Spotify Revenue Over Time</h2>
-        <p>This bar chart illustrates the trend of Spotify's revenue over the years, showcasing the growth trajectory of the company. The interactive slider allows users to filter the revenue displayed based on a target revenue threshold.</p>
+        <h2>Spotify's Growth</h2>
+        <div class="chart-description">
+          <div class="left">
+            <p>As Spotify continues to redefine the music industry, understanding its financial trajectory becomes crucial to grasping its success. This visualization of Spotify's revenue over time showcases the platform's remarkable growth since its inception.</p>
+            <p>Each bar in the chart represents the annual revenue in billions of euros, highlighting a consistent upward trend.</p>
+          </div>
+
+          <div class="right">
+            <p>The increasing figures not only reflect Spotify's expanding user base but also underscore its strategic innovations and partnerships that have propelled its financial success.</p>
+            <p> Through this visualization, we can explore how Spotify has transformed into a leading player in the digital music landscape, revealing the patterns and milestones that have contributed to its impressive revenue growth year after year.</p>
+          </div>
+        </div>
+
+
         <div id="spotify-revenue-time-chart"></div>
     </div>
 
     <div class="chart-container">
-        <h2>Spotify's Pay Per Million Streams in Each Country (USD)</h2>
-        <p>This map visualization displays Spotify's pay per million streams across different countries. It highlights the variations in compensation for artists based on their geographical location, providing insights into market dynamics.</p>
+        <h2>Spotify's Pay</h2>
+        <div class="chart-description">
+          <div class="left">
+            <p>Having explored Spotify's impressive revenue growth over the years, we now turn our attention to a critical aspect of the music streaming economy: the pay per stream model. Understanding how Spotify compensates artists and rights holders provides valuable insight into the platform's financial ecosystem.</p>
+            <p>This next visualization illustrates Spotify's pay per million streams across different countries, highlighting the disparities in earnings that artists receive worldwide.</p>
+          </div>
+
+          <div class="right">
+            <p>By examining this data, we can uncover the factors influencing these variations, such as local market conditions, subscription models, and user engagement. These variations reveal the complex dynamics of how artists monetize their music in different regions.</p>
+            <p>As we delve into this geographical representation, it becomes clear that the streaming landscape is not just about listening habits; it’s also about how artists are compensated for their work in an ever-evolving digital marketplace.</p>
+          </div>
+        </div>
+
         <div id="spotify-pay-per-million-streams-chart"></div>
     </div>
 
     <div class="chart-container">
-        <h2>Age Demography of Spotify Users in 2023</h2>
-        <p>This pie chart visualizes the age demographic of Spotify users in 2023, showing the distribution of users across different age groups. Each slice represents the percentage of users in a specific age range.</p>
-        <div id="spotify-age-demography-chart"></div>
+      <h2>Spotify Monthly Active Users</h2>
+      <div class="chart-description">
+        <div class="left">
+          <p>After exploring Spotify's pay-per-stream system and its varying compensation rates across the globe, it's essential to examine the platform's growing user base, which drives much of its success. Spotify's user engagement, measured through Monthly Active Users (MAUs), reveals how well the service resonates with listeners worldwide. </p>
+          <p>This next visualization tracks the growth in Spotify's MAUs over several years, divided by the 4 quarters of each year. </p>
+        </div>
+
+        <div class="right">
+          <p>By looking at these patterns, we can observe how different times of the year impact user activity and identify any significant spikes in growth. Understanding these trends helps paint a clearer picture of Spotify's global footprint and how the platform continues to attract millions of users across regions and demographics.</p>
+        </div>
+      </div>
+      
+      <div id="spotify-monthly-active-users-chart"></div>
     </div>
 
     <div class="chart-container">
-        <h2>Spotify Top Podcasts (in millions)</h2>
-        <p>This chart displays the top podcasts on Spotify measured by follower count in millions. The visualization effectively highlights the leading podcasts and their respective audience sizes.</p>
+      <h2>Spotify Age Distribution</h2>
+      <div class="chart-description">
+        <div class="left">
+          <p>Following Spotify's impressive growth in active users over time, it's insightful to understand who these users are. Spotify attracts a diverse audience, but some age groups are more prominent than others. In this next visualization, we explore the age demographics of Spotify users in 2023. </p>
+        </div>
+
+        <div class="right">
+          <p>Understanding the distribution of age groups gives valuable insight into Spotify's appeal across different generations, revealing the platform's popularity among younger listeners while also showing its reach in other demographics. This breakdown helps highlight which age groups dominate the platform and which offer potential for future growth.</p>
+        </div>
+      </div>
+
+      <div id="spotify-age-demography-chart"></div>
+    </div>
+
+    <div class="chart-container">
+      <h2>Spotify Top Artists</h2>
+      <div class="chart-description">
+        <div class="left">
+          <h3>Who do the users listen to?</h3>
+          <p>After examining the age demographics of Spotify users, it's important to take a closer look at the top artists dominating the platform. Spotify's extensive global reach means that certain artists have amassed billions of streams, making them household names and industry powerhouses.</p>
+          <p>The following chart highlights the top artists by their total Spotify streams, showcasing how musical preferences and trends translate into massive listener numbers. </p>
+        </div>
+
+        <div class="right">
+          <h3>Tired of looking through the names to find your favorite artist?</h3>
+          <p>Good news! You can interactively select specific artists to see their individual impact on Spotify's streaming data. Their data will be automatically highlighted.</p>
+        </div>
+      </div>
+
+      <div id="spotify-top-artists-chart"></div>
+    </div>
+
+    <div class="chart-container">
+      <h2>Spotify Top Podcasts</h2>
+      <div class="chart-description">
+        <div class="left">
+          <p>Finally, as we explore the realm of audio content on Spotify, it's important to note the platform's growing prominence in the podcasting landscape. Podcasts have become a key part of Spotify's offerings, attracting millions of listeners who seek diverse topics and engaging narratives. </p>
+        </div>
+
+        <div class="right">
+          <p>The upcoming chart showcases the top podcasts on Spotify, illustrating their follower counts and the immense popularity they enjoy. This evolution in audio consumption highlights not only the demand for informative and entertaining content but also the changing landscape of media consumption in our digital age.</p>
+        </div>
+      </div>
+        
         <div id="spotify-top-podcasts-chart"></div>
     </div>
 
-    <div class="chart-container">
-        <h2>Top Artists by Total Spotify Streams (in billions)</h2>
-        <p>This visualization ranks the top artists on Spotify based on their total streams in billions. It allows users to see which artists dominate the platform in terms of listener engagement.</p>
-        <div id="spotify-top-artists-chart"></div>
-    </div>
-
-    <div class="chart-container">
-        <h2>Spotify Monthly Active Users by Each Quarter of the Year</h2>
-        <p>This line chart shows the monthly active users of Spotify for each quarter from 2015 to 2023, giving a comparative view of user growth across different quarters.</p>
-        <div id="spotify-monthly-active-users-chart"></div>
-    </div>
+    <!-- References section -->
+    <footer style="text-align: left; margin-top: 40px; font-size: 9px; color: #777;">
+        <p>Designed by Wang Eugene</p>
+        <p>Data provided by Spotify and others.</p>
+        <p>Additional Sources: https://docs.google.com/document/d/1VCfAmSCx3k_uQP03YH-YUPdLCvELB8Ze_nEUqwCCc_s/edit</p>
+        <p>Date: 13th October 2024</p>
+    </footer>
 
     <script>
         // Spotify Revenue Over Time Chart
         const revenueOverTimeSpec = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 1200,
-            "height": 600,
-            "title": {
-                "text": "Spotify Revenue Over Time",
-                "fontWeight": "bold",
-                "fontSize": 20
-            },
-            "data": {
-                "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/spotify%20revenue.csv"
-            },
-            "params": [
-                {
-                    "name": "Target_Revenue",
-                    "value": 0.43,
-                    "bind": {
-                        "input": "range",
-                        "min": 0.43,
-                        "max": 13.25,
-                        "step": 0.01,
-                        "name": "Select Target Revenue in € (Billions): "
-                    }
-                }
-            ],
-            "transform": [
-                {
-                    "filter": "datum['Spotify Revenue in billions (Euros)'] >= Target_Revenue"
-                }
-            ],
-            "layer": [
-                {
-                    "mark": {
-                        "type": "bar",
-                        "width": 30,
-                        "color": "#756bb1"
-                    },
-                    "encoding": {
-                        "x": {
-                            "field": "Year",
-                            "type": "nominal",
-                            "timeUnit": "year",
-                            "title": "Year",
-                            "axis": {
-                                "titleFontSize": 12
-                            }
-                        },
-                        "y": {
-                            "field": "Spotify Revenue in billions (Euros)",
-                            "type": "quantitative",
-                            "title": "Spotify Revenue (Billions of Euros)",
-                            "axis": {
-                                "titleFontSize": 12
-                            }
-                        },
-                        "tooltip": [
-                            {
-                                "field": "Year",
-                                "type": "temporal",
-                                "title": "Year:",
-                                "format": "%Y"
-                            },
-                            {
-                                "field": "Spotify Revenue in billions (Euros)",
-                                "type": "quantitative",
-                                "title": "Revenue in € (Billions):",
-                                "format": ".2f"
-                            }
-                        ]
-                    }
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "width": 1200,
+          "height": 600,
+          "title": {
+            "text": "Spotify Revenue Over Time",
+            "fontWeight": "bold",
+            "fontSize": 20,
+            "anchor": "middle"  // Center the title
+          },
+          "data": {
+            "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/spotify%20revenue.csv"
+          },
+          "layer": [
+            {
+              "mark": {
+                "type": "bar",
+                "width": 30,
+                "color": "#a1d99b"
+              },
+              "encoding": {
+                "x": {
+                  "field": "Year",
+                  "type": "nominal",
+                  "timeUnit": "year",
+                  "title": "Year",
+                  "axis": {
+                    "titleFontSize": 13,
+                    "grid": false  // Remove grid lines for x-axis
+                  }
                 },
-                {
-                    "mark": {
-                        "type": "text",
-                        "fontSize": 12,
-                        "fontWeight": "bold",
-                        "dx": 0,
-                        "dy": -8
-                    },
-                    "encoding": {
-                        "x": {
-                            "field": "Year",
-                            "type": "nominal",
-                            "timeUnit": "year"
-                        },
-                        "y": {
-                            "field": "Spotify Revenue in billions (Euros)",
-                            "type": "quantitative"
-                        },
-                        "text": {
-                            "field": "Spotify Revenue in billions (Euros)",
-                            "type": "quantitative",
-                            "format": ".2f"
-                        }
-                    }
+                "y": {
+                  "field": "Spotify Revenue in billions (Euros)",
+                  "type": "quantitative",
+                  "title": "Spotify Revenue (Billions of Euros)",
+                  "axis": {
+                    "titleFontSize": 13,
+                    "grid": false  // Remove grid lines for y-axis
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "Year",
+                    "type": "temporal",
+                    "title": "Year:",
+                    "format": "%Y"
+                  },
+                  {
+                    "field": "Spotify Revenue in billions (Euros)",
+                    "type": "quantitative",
+                    "title": "Revenue in € (Billions):",
+                    "format": ".2f"
+                  }
+                ]
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 12,
+                "fontWeight": "bold",
+                "dx": 0,
+                "dy": -8
+              },
+              "encoding": {
+                "x": {
+                  "field": "Year",
+                  "type": "nominal",
+                  "timeUnit": "year"
+                },
+                "y": {
+                  "field": "Spotify Revenue in billions (Euros)",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "Spotify Revenue in billions (Euros)",
+                  "type": "quantitative",
+                  "format": ".2f"
                 }
-            ]
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 290,
+                "y": 150,
+                "width": 280,
+                "height": 100
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "fontWeight": "normal",
+                "align": "left",
+                "x": 180,
+                "y": 120,
+                "dx": 0,
+                "dy": 0
+              },
+              "encoding": {
+                "text": {
+                  "value": "Spotify has consistent revenue growth,"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "fontWeight": "normal",
+                "align": "left",
+                "x": 180,
+                "y": 140,
+                "dx": 0,
+                "dy": 0
+              },
+              "encoding": {
+                "text": {
+                  "value": "with a huge increase every year."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "fontWeight": "normal",
+                "align": "left",
+                "x": 180,
+                "y": 160,
+                "dx": 0,
+                "dy": 0
+              },
+              "encoding": {
+                "text": {
+                  "value": "This chart shows the positive trend of annual"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "fontWeight": "normal",
+                "align": "left",
+                "x": 180,
+                "y": 180,
+                "dx": 0,
+                "dy": 0
+              },
+              "encoding": {
+                "text": {
+                  "value": "revenue over time."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 345,
+                "y": 300,
+                "width": 260,
+                "height": 120
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "fontWeight": "normal",
+                "align": "left",
+                "x": 245,
+                "y": 270,
+                "dx": 0,
+                "dy": 0
+              },
+              "encoding": {
+                "text": {
+                  "value": "Spotify's user base has increased"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "fontWeight": "normal",
+                "align": "left",
+                "x": 245,
+                "y": 290,
+                "dx": 0,
+                "dy": 0
+              },
+              "encoding": {
+                "text": {
+                  "value": "steadily, with significant growth noted "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "fontWeight": "normal",
+                "align": "left",
+                "x": 245,
+                "y": 310,
+                "dx": 0,
+                "dy": 0
+              },
+              "encoding": {
+                "text": {
+                  "value": "during major milestones such as "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "fontWeight": "bold",
+                "align": "left",
+                "x": 245,
+                "y": 330,
+                "dx": 0,
+                "dy": 0
+              },
+              "encoding": {
+                "text": {
+                  "value": "new album releases and partnerships."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 910,
+                "y": 40,
+                "width": 430,
+                "height": 60
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "align": "left",
+                "x": 710,
+                "y": 30,
+                "dx": 0,
+                "dy": 0
+              },
+              "encoding": {
+                "text": {
+                  "value": "In 2023, Spotify's revenue reached around €13 billion, driven by a growing user"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "align": "left",
+                "x": 710,
+                "y": 50,
+                "dx": 0,
+                "dy": 0
+              },
+              "encoding": {
+                "text": {
+                  "value": "base, exclusive content, and new features like personalized playlists and podcasts."
+                }
+              }
+            },
+          ]
         };
+        
         vegaEmbed('#spotify-revenue-time-chart', revenueOverTimeSpec);
 
         // Spotify Pay Per Million Streams Chart
         const payPerMillionStreamsSpec = {
             "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "title": "Spotify's Pay Per Million Streams in Each Country (USD)",
-            "width": 1200,
+            "title": {
+            "text": "Spotify's Pay Per Million Streams in Each Country (USD)",
+            "fontWeight": "bold",
+            "fontSize": 20
+            },
+            "width": 1051,
             "height": 600,
             "projection": {
                 "type": "equalEarth"
@@ -228,12 +566,12 @@
                                 "type": "threshold",
                                 "domain": [1, 200, 500, 800, 3000, 5000],
                                 "range": [
-                                    "#fee5d9",
-                                    "#fcbba1",
-                                    "#fc9272",
-                                    "#fb6a4a",
-                                    "#de2d26",
-                                    "#a50f15"
+                                    "#e5f5e0",
+                                    "#a1d99b",
+                                    "#74c476",
+                                    "#41ab5d",
+                                    "#006d2c",
+                                    "#00441b"
                                 ]
                             },
                             "legend": {
@@ -265,6 +603,249 @@
         };
         vegaEmbed('#spotify-pay-per-million-streams-chart', payPerMillionStreamsSpec);
 
+        // Spotify Monthly Active Users by Quarter Chart
+        const monthlyActiveUsersSpec = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": {
+            "text": "Spotify Monthly Active Users by each Quarter of the Year",
+            "fontWeight": "bold",
+            "fontSize": 20
+          },
+          "width": 1072,
+          "height": 600,
+          "data": {
+            "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/monthly%20active%20users%20(new).csv",
+            "format": {
+              "type": "csv"
+            }
+          },
+          "layer": [
+            {
+              "mark": {
+                "type": "line",
+                "point": true
+              },
+              "encoding": {
+                "x": {
+                  "field": "Year",
+                  "type": "temporal",
+                  "timeUnit": "year",
+                  "title": "Year",
+                  "axis": {
+                    "titleFontWeight": "bold",
+                    "titleFontSize": 13
+                  }
+                },
+                "y": {
+                  "field": "Spotify Monthly Active Users (million)",
+                  "type": "quantitative",
+                  "title": "Monthly Active Users (million)",
+                  "axis": {
+                    "titleFontWeight": "bold",
+                    "titleFontSize": 13
+                  }
+                },
+                "color": {
+                  "field": "Quarter",
+                  "type": "nominal",
+                  "title": "Quarter",
+                  "scale": {
+                    "domain": ["Q1 (Jan-Mar)", "Q2 (Apr-Jun)", "Q3 (Jul-Sep)", "Q4 (Oct-Dec)"],
+                    "range": ["#1f77b4", "#ff7f0e", "#66c2a4", "#d62728"]
+                  },
+                  "legend": {
+                    "labelFontSize": 12,
+                    "titleFontSize": 12
+                  }
+                },
+                "tooltip": [
+                  {"field": "Year", "type": "temporal", "timeUnit": "year", "title": "Year"},
+                  {"field": "Quarter", "type": "nominal", "title": "Quarter"},
+                  {"field": "Spotify Monthly Active Users (million)", "type": "quantitative", "title": "Users (million)"}
+                ]
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 180,
+                "y": 560,
+                "width": 280,
+                "height": 50
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -480,
+                "dy": 250,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "In 2016, Spotify launched its service in over "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -480,
+                "dy": 270,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "60 new countries."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 400,
+                "y": 300,
+                "width": 280,
+                "height": 50
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -260,
+                "dy": -10,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "In 2019, Spotify formed a partnership with"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -260,
+                "dy": 10,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "major podcasts, increasing users."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 780,
+                "y": 380,
+                "width": 280,
+                "height": 50
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 115,
+                "dy": 70,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "In 2020, The COVID-19 pandemic led to an "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 115,
+                "dy": 90,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "uptick in streaming services."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 900,
+                "y": 40,
+                "width": 280,
+                "height": 50
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 240,
+                "dy": -270,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "In 2023, Spotify expanded its offerings in the"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 240,
+                "dy": -250,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "audiobook market, boosting monthly users."
+                }
+              }
+            },
+
+          ]
+        };
+        vegaEmbed('#spotify-monthly-active-users-chart', monthlyActiveUsersSpec);
+
         // Age Demography of Spotify Users Chart
         const ageDemographySpec = {
           "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -273,7 +854,7 @@
             "fontWeight": "bold",
             "fontSize": 20
           },
-          "width": 1200,
+          "width": 1217,
           "height": 600,
           "data": {
             "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/Age%20Demography.csv",
@@ -284,51 +865,886 @@
           "transform": [
             {
               "calculate": "datum['Percentage of users (%)']",
-              "as": "percentage" 
+              "as": "percentage"  // Alias for easier reference
             }
           ],
-          "mark": {
-            "type": "arc",
-            "outerRadius": 220 
-          },
-          "encoding": {
-            "theta": {
-              "field": "percentage", 
-              "type": "quantitative"
-            },
-            "color": {
-              "field": "Age Group", 
-              "type": "nominal",
-              "legend": {
-                "title": "Age Group"
-              }
-            },
-            "tooltip": [
-              {
-                "field": "Age Group",
-                "type": "nominal",
-                "title": "Age Group"
+          "layer": [
+            {
+              "mark": {
+                "type": "arc",
+                "outerRadius": 220  // Radius of the pie chart
               },
-              {
-                "field": "Percentage of users (%)",
-                "type": "quantitative",
-                "title": "Percentage of Users (%)",
-                "format": ".1f"
+              "encoding": {
+                "theta": {
+                  "field": "percentage",  // Use the percentage field for the angle
+                  "type": "quantitative"
+                },
+                "color": {
+                  "field": "Age Group",  // Color by age group
+                  "type": "nominal",
+                  "scale": {
+                    "domain": ["18-24", "25-34", "35-44", "45-54", "55+"],  // Define age groups
+                    "range": ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3"]  // Custom colors for each group
+                  },
+                  "legend": {
+                    "title": "Age Group",
+                    "labelFontSize": 12,  // Increase label font size
+                    "titleFontSize": 12,   // Increase title font size
+                    "orient": "right",      // Position legend to the right
+                    "offset": -200          // Adjust the offset to bring it closer
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "Age Group",
+                    "type": "nominal",
+                    "title": "Age Group"
+                  },
+                  {
+                    "field": "Percentage of users (%)",
+                    "type": "quantitative",
+                    "title": "Percentage of Users (%)",
+                    "format": ".1f"
+                  }
+                ]
               }
-            ]
-          }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 60,  // Position the text at the side of the chart
+                "dy": 100,
+                "fontSize": 14,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "29%"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -120,  // Position the text at the side of the chart
+                "dy": 100,
+                "fontSize": 14,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "16%"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -120,  // Position the text at the side of the chart
+                "dy": -5,
+                "fontSize": 14,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "11%"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -80,  // Position the text at the side of the chart
+                "dy": -90,
+                "fontSize": 14,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "18%"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 60,  // Position the text at the side of the chart
+                "dy": -90,
+                "fontSize": 14,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "26%"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5, // Optional: rounds the corners
+                "x": 1000,          // Adjust x position
+                "y": 170,          // Adjust y position
+                "width": 280,      // Adjust width to fit the text
+                "height": 100      // Adjust height to fit the text
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 260,
+                "dy": -160,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "Younger users, aged 18-24, have grown up with"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 260,
+                "dy": -140,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "streaming services. They heavily consume music "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 260,
+                "dy": -120,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "and podcasts as part of their lifestyle, being the"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 260,
+                "dy": -100,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "second largest demographic."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5, // Optional: rounds the corners
+                "x": 950,          // Adjust x position
+                "y": 500,          // Adjust y position
+                "width": 320,      // Adjust width to fit the text
+                "height": 120      // Adjust height to fit the text
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 190,
+                "dy": 160,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "Age 25-34 demographic is very engaged with"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 190,
+                "dy": 180,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "technology and streaming services, balancing between"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 190,
+                "dy": 200,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "early adulthood and professional life. Many are willing"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 190,
+                "dy": 220,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "to pay for premium subscriptions for better user"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 190,
+                "dy": 240,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "experience, contributing significantly to Spotify's growth."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5, // Optional: rounds the corners
+                "x": 250,          // Adjust x position
+                "y": 500,          // Adjust y position
+                "width": 320,      // Adjust width to fit the text
+                "height": 120      // Adjust height to fit the text
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -510,
+                "dy": 160,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "Users in the 35-44 age range grew up during the shift"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -510,
+                "dy": 180,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "from physical media to digital downloads and streaming. "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -510,
+                "dy": 200,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "While not as engaged as younger groups, they still use "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -510,
+                "dy": 220,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "Spotify regularly, often balancing family or work"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -510,
+                "dy": 240,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "commitments while seeking accessible entertainment."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5, // Optional: rounds the corners
+                "x": 200,          // Adjust x position
+                "y": 300,          // Adjust y position
+                "width": 320,      // Adjust width to fit the text
+                "height": 120      // Adjust height to fit the text
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -560,
+                "dy": -40,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "Age 45-54 group may not have embraced streaming"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -560,
+                "dy": -20,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "technology as fully as younger demographics. They "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -560,
+                "dy": 0,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "might still be in a transition phase from older forms of"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -560,
+                "dy": 20,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "media consumption, such as CDs and radio, to"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -560,
+                "dy": 40,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "streaming, but adoption is gradually increasing."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5, // Optional: rounds the corners
+                "x": 250,          // Adjust x position
+                "y": 100,          // Adjust y position
+                "width": 320,      // Adjust width to fit the text
+                "height": 120      // Adjust height to fit the text
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -510,
+                "dy": -240,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "Older generations (age 55+) tend to be less digitally"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -510,
+                "dy": -220,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "inclined and more attached to traditional media formats"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -510,
+                "dy": -200,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "like radio or physical albums. However, many in this"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -510,
+                "dy": -180,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "group are becoming more tech-savvy, making them the "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -510,
+                "dy": -160,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": { 
+                  "value": "third largest demographic. "
+                }
+              }
+            },
+
+
+          ]
         };
         vegaEmbed('#spotify-age-demography-chart', ageDemographySpec);
+
+        
+        // Top Artists by Total Spotify Streams Chart
+        const topArtistsSpec = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": {
+            "text": "Top Artists by Total Spotify Streams (in billions)",
+            "fontWeight": "bold",
+            "fontSize": 20
+          },
+          "width": 1110,
+          "height": 600,
+          "data": {
+            "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/Top%20Artists.csv",
+            "format": {
+              "type": "csv"
+            }
+          },
+          "params": [
+            {
+              "name": "selectedArtist",
+              "value": "All Artists",
+              "bind": {
+                "input": "select",
+                "options": [
+                  "All Artists",
+                  "Taylor Swift",
+                  "Drake",
+                  "Bad Bunny",
+                  "The Weeknd",
+                  "Ed Sheeran",
+                  "Ariana Grande",
+                  "Justin Bieber",
+                  "Eminem",
+                  "Post Malone",
+                  "Kanye West",
+                  "BTS",
+                  "Billie Eilish",
+                  "Rihanna",
+                  "J Balvin",
+                  "Coldplay",
+                  "Travis Scott",
+                  "Dua Lipa",
+                  "Juice WRLD",
+                  "Imagine Dragons",
+                  "XXXTENTACION"
+                ],
+                "name": "Selected artist will be highlighted: "
+              }
+            }
+          ],
+          "transform": [
+            {
+              "calculate": "datum['Total Spotify Streams (billion)']",
+              "as": "Total Streams"
+            },
+            {
+              "filter": {
+                "or": [
+                  {"field": "Artist", "equal": {"param": "selectedArtist"}},
+                  {"param": "selectedArtist", "equal": "All Artists"}
+                ]
+              }
+            }
+          ],
+          "layer": [
+            {
+              "mark": {
+                "type": "rule",
+                "strokeWidth": 2,
+                "stroke": "#0b6419"
+              },
+              "encoding": {
+                "x": {
+                  "field": "Total Streams",
+                  "type": "quantitative",
+                  "title": "Total Streams (in billions)",
+                  "scale": {
+                    "domain": [0, 90]
+                  },
+                  "axis": {
+                    "grid": false,
+                    "titleFontWeight": "bold",
+                    "titleFontSize": 13
+                  }
+                },
+                "y": {
+                  "field": "Artist",
+                  "type": "nominal",
+                  "title": "Artist",
+                  "sort": {
+                    "field": "Total Streams",
+                    "order": "descending"
+                  },
+                  "axis": {
+                    "grid": false,
+                    "titleFontWeight": "bold",
+                    "titleFontSize": 13
+                  }
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "point",
+                "filled": true,
+                "color": "#44c672"
+              },
+              "encoding": {
+                "x": {
+                  "field": "Total Streams",
+                  "type": "quantitative"
+                },
+                "y": {
+                  "field": "Artist",
+                  "type": "nominal",
+                  "sort": {
+                    "field": "Total Streams",
+                    "order": "descending"
+                  }
+                },
+                "color": {
+                  "condition": {
+                    "test": "datum.Artist === selectedArtist", 
+                    "value": "#ff7f0e" 
+                  },
+                  "value": "#44c672"
+                },
+                "size": {
+                  "condition": {
+                    "test": "datum.Artist === selectedArtist", 
+                    "value": 400 
+                  },
+                  "value": 100
+                },
+                "tooltip": [
+                  {
+                    "field": "Artist",
+                    "type": "nominal",
+                    "title": "Artist"
+                  },
+                  {
+                    "field": "Total Spotify Streams (billion)",
+                    "type": "quantitative",
+                    "title": "Total Streams (in billions)",
+                    "format": ".2f"
+                  }
+                ]
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5, // Optional: rounds the corners
+                "x": 610,          // Adjust x position
+                "y": 560,          // Adjust y position
+                "width": 370,      // Adjust width to fit the text
+                "height": 50       // Adjust height to fit the text
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -120,
+                "dy": 250,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "Despite passing away in 2018, XXXTentacion remains a top artist "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -120,
+                "dy": 270,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "Spotify. His posthumous releases continue to resonate with fans."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5, // Optional: rounds the corners
+                "x": 860,          // Adjust x position
+                "y": 360,          // Adjust y position
+                "width": 370,      // Adjust width to fit the text
+                "height": 150      // Adjust height to fit the text
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 130,
+                "dy": 0,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "The Spotify top artists chart highlights the most-streamed"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 130,
+                "dy": 20,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "musicians, showcasing a diverse range of genres and styles. "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 130,
+                "dy": 40,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "Artists like Taylor Swift, Drake, and Bad Bunny lead the list,"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 130,
+                "dy": 60,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "reflecting their popularity and influence in the music industry. This"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 130,
+                "dy": 80,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "ranking not only illustrates current trends in music consumption"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 130,
+                "dy": 100,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "but also emphasizes how listener preferences evolve over time, "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 130,
+                "dy": 120,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "driven by cultural moments and social media engagement."
+                }
+              }
+            }
+          ]
+        };
+        vegaEmbed('#spotify-top-artists-chart', topArtistsSpec);
 
         // Spotify Top Podcasts Chart
         const topPodcastsSpec = {
           "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
           "title": {
-            "text": "Spotify Top Podcasts (in millions)",
+            "text": "Spotify Top Podcasts by Follower Count (in millions)",
             "fontWeight": "bold",
             "fontSize": 20
           },
-          "width": 1200,
+          "width": 1005,
           "height": 600,
           "data": {
             "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/Top%20Podcast.csv",
@@ -351,7 +1767,7 @@
               "mark": {
                 "type": "rule",
                 "strokeWidth": 2,
-                "stroke": "#252525"
+                "stroke": "#016c59"
               },
               "encoding": {
                 "x": {
@@ -360,6 +1776,10 @@
                   "title": "Follower Count (in millions)",
                   "scale": {
                     "domain": [0, 15] 
+                  },
+                  "axis": {
+                    "grid": false,
+                    "titleFontSize": 13 // Set label font size for x-axis
                   }
                 },
                 "y": {
@@ -369,6 +1789,10 @@
                   "sort": {
                     "field": "Adjusted Count",
                     "order": "descending" 
+                  },
+                  "axis": {
+                    "grid": false,
+                    "titleFontSize": 13 // Set label font size for y-axis
                   }
                 }
               }
@@ -378,7 +1802,7 @@
                 "type": "point",
                 "filled": true,
                 "size": 100,
-                "color": "#756bb1"
+                "color": "#02818a"
               },
               "encoding": {
                 "x": {
@@ -407,148 +1831,306 @@
                   }
                 ]
               }
-            }
-          ]
-        };
-        vegaEmbed('#spotify-top-podcasts-chart', topPodcastsSpec);
-
-        // Top Artists by Total Spotify Streams Chart
-        const topArtistsSpec = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "title": {
-            "text": "Top Artists by Total Spotify Streams (in billions)",
-            "fontWeight": "bold",
-            "fontSize": 20
-          },
-          "width": 1200,
-          "height": 600,
-          "data": {
-            "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/Top%20Artists.csv",
-            "format": {
-              "type": "csv"
-            }
-          },
-          "transform": [
-            {
-              "calculate": "datum['Total Spotify Streams (billion)']",
-              "as": "Total Streams"
-            }
-          ],
-          "layer": [
+            },
             {
               "mark": {
-                "type": "rule",
-                "strokeWidth": 2,
-                "stroke": "#c0c0c0"  
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 800,
+                "y": 80,
+                "width": 280,
+                "height": 80
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 390,
+                "y": 150,
+                "width": 280,
+                "height": 100
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 260,
+                "y": 530,
+                "width": 350,
+                "height": 100
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#f0f0f0",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "cornerRadius": 5,
+                "x": 400,
+                "y": 300,
+                "width": 350,
+                "height": 100
+              },
+              "encoding": {}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 170,
+                "dy": -240,
+                "fontSize": 12,
+                "fontWeight": "normal"
               },
               "encoding": {
-                "x": {
-                  "field": "Total Streams",
-                  "type": "quantitative",
-                  "title": "Total Streams (in billions)",
-                  "scale": {
-                    "domain": [0, 90]  
-                  }
-                },
-                "y": {
-                  "field": "Artist",
-                  "type": "nominal",
-                  "title": "Artist",
-                  "sort": {
-                    "field": "Total Streams",
-                    "order": "descending"  
-                  }
+                "text": {
+                  "value": "The Joe Rogan Experience dominates with"
                 }
               }
             },
             {
               "mark": {
-                "type": "point",
-                "filled": true,
-                "size": 100,  
-                "color": "#756bb1"  
+                "type": "text",
+                "align": "left",
+                "dx": 170,
+                "dy": -220,
+                "fontSize": 12,
+                "fontWeight": "normal"
               },
               "encoding": {
-                "x": {
-                  "field": "Total Streams",
-                  "type": "quantitative"
-                },
-                "y": {
-                  "field": "Artist",
-                  "type": "nominal",
-                  "sort": {
-                    "field": "Total Streams",  
-                    "order": "descending" 
-                  }
-                },
-                "tooltip": [
-                  {
-                    "field": "Artist",
-                    "type": "nominal",
-                    "title": "Artist"
-                  },
-                  {
-                    "field": "Total Spotify Streams (billion)",
-                    "type": "quantitative",
-                    "title": "Total Streams (in billions)",
-                    "format": ".2f"
-                  }
-                ]
+                "text": {
+                  "value": "15 million followers, \nsetting it apart from other"
+                }
               }
-            }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 170,
+                "dy": -200,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "top podcasts on Spotify."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -240,
+                "dy": -190,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "Hosted by Ashley Flowers and Brit Prawat"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -240,
+                "dy": -170,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "Crime Junkie explores gripping true crime "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -240,
+                "dy": -150,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "stories, from unsolved mysteries to infamous "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -240,
+                "dy": -130,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "cases, delivering engaging narratives that "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -240,
+                "dy": -110,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "captivate true crime enthusiasts. "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -410,
+                "dy": 200,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "The Ben Shapiro Show podcast offers daily analysis of political "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -410,
+                "dy": 220,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "events & social issues from a right-leaning perspective.  "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -410,
+                "dy": 240,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "Shapiro engages listeners with discussions on politics, culture,"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -410,
+                "dy": 260,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "and economics, rounding up the top 15 podcast on Spotify."
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -260,
+                "dy": -30,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": " The Daily delivers in-depth and insightful coverage of the"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -260,
+                "dy": -10,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "top stories. The podcast covers a wide range of topics, from"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -260,
+                "dy": 10,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": "politics and global affairs to social issues, giving listeners "
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": -260,
+                "dy": 30,
+                "fontSize": 12,
+                "fontWeight": "normal"
+              },
+              "encoding": {
+                "text": {
+                  "value": " a detailed and thoughtful analysis of current events."
+                }
+              }
+            },
           ]
         };
-        vegaEmbed('#spotify-top-artists-chart', topArtistsSpec);
-
-        // Spotify Monthly Active Users by Quarter Chart
-        const monthlyActiveUsersSpec = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "title": {
-            "text": "Spotify Monthly Active Users by each Quarter of the Year",
-            "fontWeight": "bold",
-            "fontSize": 20
-          },
-          "width": 1200,
-          "height": 600,
-          "data": {
-            "url": "https://raw.githubusercontent.com/eugene-xx/DataVisualisation2/refs/heads/main/monthly%20active%20users%20(new).csv",
-            "format": {
-              "type": "csv"
-            }
-          },
-          "mark": {
-            "type": "line",
-            "point": true
-          },
-          "encoding": {
-            "x": {
-              "field": "Year",
-              "type": "temporal",
-              "timeUnit": "year",
-              "title": "Year"
-            },
-            "y": {
-              "field": "Spotify Monthly Active Users (million)",
-              "type": "quantitative",
-              "title": "Monthly Active Users (million)"
-            },
-            "color": {
-              "field": "Quarter",
-              "type": "nominal",
-              "title": "Quarter",
-              "scale": {
-                "domain": ["Q1", "Q2", "Q3", "Q4"],
-                "range": ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"]
-              }
-            },
-            "tooltip": [
-              {"field": "Year", "type": "temporal", "timeUnit": "year", "title": "Year"},
-              {"field": "Quarter", "type": "nominal", "title": "Quarter"},
-              {"field": "Spotify Monthly Active Users (million)", "type": "quantitative", "title": "Users (million)"}
-            ]
-          }
-        };
-        vegaEmbed('#spotify-monthly-active-users-chart', monthlyActiveUsersSpec);
+        vegaEmbed('#spotify-top-podcasts-chart', topPodcastsSpec);
     </script>
 </body>
 </html>
